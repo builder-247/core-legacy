@@ -1,0 +1,14 @@
+Coins:
+Force Field Time:
+
+Kills:
+Deaths:
+Killstreaks:
+Shots Fired:
+Wins:
+K/D Ratio:
+Shot/Kill Ratio:
+
+Selected Hat:
+
+Perks

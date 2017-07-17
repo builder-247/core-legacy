@@ -1,0 +1,9 @@
+Coins:
+
+Kills:
+Deaths:
+Assists:
+Wins:
+Losses:
+K/D Ratio:
+W/L Ratio

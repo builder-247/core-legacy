@@ -1,0 +1,20 @@
+//Much to do here as well
+
+Coins:
+
+Wins:
+Kills:
+Assists:
+Deaths:
+K/D Ratio:
+W/L Ratio:
+
+Most Kills:
+Mobs Spawned:
+Time Played:
+
+Classes:
+Kit Card1  Card2    Card3
+
+Kit Stats:
+Kit Wins    Kills   Assists:    Deaths: K/D:

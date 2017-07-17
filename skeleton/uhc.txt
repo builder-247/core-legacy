@@ -1,0 +1,19 @@
+Coins:
+Score:
+Rank:
+
+Kills Solo:
+Deaths Solo:
+Wins Solo:
+Solo K/D Ratio:
+Solo W/L Ratio:
+
+Kills Team:
+Deaths Team:
+Wins Team:
+Team K/D Ratio:
+Team W/L Ratio:
+
+Heads Eaten:
+
+Perks

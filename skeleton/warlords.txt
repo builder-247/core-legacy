@@ -1,0 +1,44 @@
+Coins:
+
+Kills:
+Assists:
+A/K Ratio:
+Deaths:
+K/D Ratio:
+KDA Ratio:
+Wins:
+Losses:
+W/L Ratio:
+
+Repaired Weapons:
+Flags Captured:
+
+Common Weapons:
+Rare Weapons:
+Epic Weapons:
+Legendary Weapons:
+
+Crafted Rare;
+Crafted Epic:
+Crafted Legendary:
+
+Legendary Rerolls
+
+Magic Dust:
+Void Shards:
+Dust from Salvaging:
+Salvaged Void Shards:
+
+Times AFK Warned:
+
+Class   Level   Wins    Damage    Prevent/Absorb  Healing Total
+
+Mage
+
+Warrior
+
+Paladin
+
+Shaman
+
+

@@ -1,0 +1,14 @@
+Coins:
+
+Gold bought:
+
+Human Kills:
+Human Deaths:
+Humans Wins:
+Zombie Kills:
+Vampire Kills:
+Vampire Deaths:
+Vampire K/D Ratio:
+Human K/D Ratio:
+
+Upgrades

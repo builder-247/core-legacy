@@ -1,0 +1,28 @@
+Coins:
+
+Highest Killstreak:
+
+Dash Power:
+Dash Cooldown:
+
+Godlikes:
+
+Selected gun + breakdown
+Kill Sound:
+
+Mode    Kills   Headshots   Wins    Shots Fired Blocks Traveled Godlikes    Killstreaks     K/D W/L
+
+Solo
+
+Teams
+
+
+Wins:
+Kills:
+Losses:
+Deaths:
+W/L Ratio:
+K/D Ratio:
+
+
+

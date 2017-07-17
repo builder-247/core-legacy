@@ -1,0 +1,43 @@
+Coins:
+
+Kills:
+Deaths:
+Assists:
+Wins:
+Losses:
+K/D Ratio:
+W/L Ratio:
+
+Salt:
+Tears:
+Total Tears:
+Tear Well Uses:
+Tear Well Commons:
+Tear Well Rares:
+Tear Well Legendaries:
+
+Arrows Shot:
+Enderpearls Thrown:
+Eggs Thrown:
+
+Games Quit:
+Survived Players:
+Items Enchanted:
+
+Blocks Placed:
+Blocks Broken:
+
+Mode    Kills   Deaths  Wins    Losses  K/D W/L
+
+Solo Normal
+
+Solo Insane
+
+Team Normal
+
+Team Insane
+
+
+Perks
+
+Kits

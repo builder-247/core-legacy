@@ -1,0 +1,53 @@
+//WIP
+
+Coins:
+
+    Galaxy Wars
+Kills:
+Shots Fired:
+Rebel Kills:
+Deaths:
+
+    Farm Hunt
+Poop collected:
+Wins:
+
+    Bounty Hunters
+Wins:
+Deaths:
+Bounty Kills:
+Kills:
+
+    Blocking Dead
+Kills:
+Headshots:
+Wins:
+
+    Football:
+Wins:
+Goals:
+Power Kicks:
+
+    Mini Walls:
+Arrows hit:
+Kills:
+Final Kills:
+Wins:
+Deaths:
+K/D Ratio:
+Wither Damage:
+Wither Kills:
+
+Hole in the Wall Record:
+Total Hole in the Walls Rounds:
+Hypixel Says Rounds:
+Hypixel Says Wins:
+Kills throwout:
+Deaths throwout:
+Kills dragon wars:
+Wins dragon wars:
+Build Battle wins:
+Max Creeper Attack Wave:
+Party Games 1 wins:
+Party Games 2 wins:
+Party Games 3 wins:

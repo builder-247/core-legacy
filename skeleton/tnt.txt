@@ -1,0 +1,31 @@
+Coins:
+
+TNT Run Wins:
+TNT Run Longest Game:
+TNT Run Potions Splashed:
+TNT Run Deaths:
+
+PVP Run Wins:
+PVP Run Kills:
+PVP Run Longest Game:
+PVP Run Potions Splashed:
+PVP Run Deaths:
+
+TNTag Wins:
+
+Bowspleef Wins:
+Bowspleef Losses:
+Bowspleef W/L Ratio:
+
+Wizard Kills:
+Wizard Deaths:
+Wizard Assists:
+Wizard Wins:
+Wizards K/D Ratio:
+
+Selected Hat:
+Death Effect:
+Active Particle Effect:
+Double Jump Effect:
+
+Perks

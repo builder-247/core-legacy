@@ -1,0 +1,31 @@
+Coins:
+Keys:
+
+Mode    Kills   Deaths  Wins    Losses   Healing Damage  K/D W/L
+
+1v1
+
+2v2
+
+4v4
+
+Total Wins:
+Total Losses:
+Total Kills:
+Total Deaths:
+K/D Ratio:
+W/L Ratio:
+Total Damage:
+Total Healing:
+
+Keys used:
+Coins used:
+
+Selected abilities
+
+Selected Hat:
+Selected Sword:
+Selected Armor:
+
+Upgrade levels
+Rune levels

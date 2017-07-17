@@ -1,0 +1,31 @@
+Coins:
+
+Total Kills:
+Headshots:
+Deaths:
+Game Wins:
+Round Wins:
+Shots Fired:
+Cop Kills:
+Criminal Kills:
+Bombs Planted:
+Bombs Defused:
+
+Name    Skin    Cost reduction  Recoil reduction    Reload time reduction
+
+Carbine
+
+Magnum
+
+Pistol
+
+Rifle
+
+Shotgun
+
+Smg
+
+Sniper
+
+
+Wins in each map

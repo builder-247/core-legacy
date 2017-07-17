@@ -1,0 +1,28 @@
+Coins:
+
+Current Kart
+
+Gold Trophies:
+Silver Trophies:
+Bronze Trophies:
+Total Laps:
+Win Ratio:
+
+Coins Picked up:
+Powerups Picked up:
+Blue Torpedo Hits:
+Times slipped on a banana:
+Enemy slips on your banana:
+
+
+Map         Times Played    Box Pickups Gold T. Silver T.   Bronze T.   Win Ratio
+
+Retro
+
+Hypixel GP
+
+Jungle Rush
+
+Olympus
+
+Canyon

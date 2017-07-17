@@ -1,0 +1,40 @@
+Coins:
+Level:
+
+Kills:
+Deaths:
+Wins:
+Losses:
+K/D:
+W/L:
+
+Beds Broken:
+Beds Lost:
+
+Final Kills:
+Final Deaths:
+Final K/D:
+
+Void Kills:
+Void Deaths:
+
+Winstreak:
+
+Iron Collected:
+Gold Collected:
+Diamonds Collected:
+Emeralds Collected:
+
+Items Purchased:
+
+Box Summary
+
+Type    Kills   Deaths  FK  FD  Wins    Losses  Beds Broken     KD  Final KD    WL
+
+Solo
+
+Doubles
+
+3v3v3v3
+
+4v4v4v4

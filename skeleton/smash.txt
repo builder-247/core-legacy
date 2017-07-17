@@ -1,0 +1,25 @@
+//Has super in-depth data - TODO
+
+Coins:
+Smash Level:
+
+Kills:
+Deaths:
+Wins:
+Losses:
+K/D Ratio:
+W/L Ratio:
+
+Active Class:
+Win Streak:
+Game Quit:
+
+Damage Dealt:
+
+XP Booster Games Left:
+XP Booster Breakdown
+
+Class   Pres    Level   Kills   Deaths Wins   Losses K/D    W/L
+
+
+Mode    Kills   Deaths Wins Losses  K/D W/L

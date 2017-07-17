@@ -1,0 +1,33 @@
+Coins:
+
+Golden Skulls:
+Golden Skulls Used:
+Gold Dust:
+
+Giant Zombie Rares:
+
+Kills:
+Deaths:
+Wins:
+Losses:
+K/D Ratio:
+W/L Ratio:
+Players survived:
+
+Arrows Hit:
+
+Active Kit Solo:
+Active Kit Teams:
+
+Perks
+
+
+Mode    Kills   Deaths  Wins    K/D
+
+Solo Normal
+
+Solo Lucky
+
+Team Normal
+
+Tram Lucky

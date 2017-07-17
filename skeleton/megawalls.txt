@@ -1,0 +1,22 @@
+//Oh boy lots to do here - Advanced stuff probs better to do after release
+
+Coins:
+
+Kills:
+Assists:
+Deaths:
+Final Kills:
+Final Assists:
+Final Deaths:
+Wins:
+Losses:
+K/D Ratio:
+FK/D Ratio:
+W/L Ratio:
+
+Wither Damage:
+Defending Kills:
+
+Chosen class:
+
+Time played:

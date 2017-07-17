@@ -1,0 +1,53 @@
+Coins:
+
+Kills:
+Assists:
+Deaths:
+K/D Ratio:
+Wins:
+Losses:
+W/L Ratio:
+
+Blocks Broken:
+Blocks Placed:
+
+Souls:
+Soul Well Uses:
+Soul Well Legendaries:
+Soul Well Rares:
+Paid Souls:
+Souls Gathered:
+
+Eggs thrown:
+Enderpearls Thrown:
+
+Arrows Shot:
+Arrows Hit:
+Arrow Accuracy:
+
+Time Played:
+Games Quit:
+
+Players Survived:
+
+Active Cage:
+
+Mode    Kills   Deaths  K/D Wins    Losses  W/L
+
+Ranked
+
+Solo Normal
+
+Solo Insane
+
+Team Normal
+
+Team Insane
+
+Mega
+
+
+Perks
+
+Active Kits
+

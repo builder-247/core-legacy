@@ -1,0 +1,18 @@
+Coins:
+
+Kills:
+Deaths:
+Wins Solo:
+Wins Team:
+K/D Ratio: getRatio(kills, deaths)
+W/L Ratio: getRatio(wins, deaths)
+Kills per Game:
+
+Equipped Taunt:
+Selected Kit:
+After Kill Effect:
+Finisher:
+Aura:
+Victory Dance:
+
+Kits:
