@@ -1,4 +1,5 @@
 const Player = require("../models/Player");
+const util = require("../util/Utility");
 
 module.exports = {
 
@@ -20,6 +21,28 @@ module.exports = {
             }
             callback(null, player)
         })
+    },
+
+    // Name can be either username or dashed UUID.
+    findPlayer: function (name, callback) {
+
+        util.validatePlayer(name, isValid);
+
+        function isValid (err, uuid) {
+            if (err) {
+                callback(err, null);
+                return
+            }
+
+            // Not like this
+            Player.findOne({ player.uuid: uuid}, function(err, player) {
+                if (err) {
+                    callback(err, null);
+                    return
+                }
+                callback(null, player)
+            })
+        }
     },
 
     create: function (params, callback) {

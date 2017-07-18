@@ -17,7 +17,6 @@ const router = express.Router();
 const APIBuilder = require("./lib/APIBuilder");
 const HypixelAPIManager = require("./HypixelAPIManager");
 const MojangAPIManager = require("./MojangAPIManager");
-const processName = require("./processName");
 const util = require("./util/Utility");
 
 // View engine set up

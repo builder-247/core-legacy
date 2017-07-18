@@ -98,4 +98,37 @@ router.post("/:resource", function (req, res, next) {
     })
 });
 
+// ONLY FOR TESTING
+
+router.delete("/:resource/:id", function (req, res, next) {
+
+    const resource = req.params.resource;
+    const id = req.params.id;
+
+    const controller = controllers[resource];
+
+    if (controller === undefined) {
+        res.json({
+            success: false,
+            message: "Invalid Resource Request: " + resource
+        });
+        return
+    }
+
+    controller.delete(id, function (err, result) {
+        if (err) {
+            res.json({
+                success: false,
+                message: "Not Found"
+            });
+            return
+        } else {
+            res.json({
+                success: true,
+                result: result
+            })
+        }
+    })
+});
+
 module.exports = router;
