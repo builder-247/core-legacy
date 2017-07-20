@@ -1,11 +1,11 @@
-var request = require("request");
-var RateLimiter = require("limiter").RateLimiter;
-var config = require("./config");
-var limiter = new RateLimiter(config.HYPIXEL_API_LIMIT, "minute");
+const request = require("request");
+const RateLimiter = require("limiter").RateLimiter;
+const config = require("./config");
+const limiter = new RateLimiter(config.HYPIXEL_API_LIMIT, "minute");
 
-var api_key = config.HYPIXEL_API_KEY;
+const api_key = config.HYPIXEL_API_KEY;
 
-var API_IS_DOWN = false;
+let API_IS_DOWN = false;
 
 // See https://github.com/HypixelDev/PublicAPI/tree/master/Documentation/methods
 module.exports = function (type, param, callback) {
@@ -22,17 +22,22 @@ module.exports = function (type, param, callback) {
     if (!API_IS_DOWN) {
         limiter.removeTokens(1, function () {
             console.log("https://api.hypixel.net/" + type + "?key=" + api_key + param);
-            request("https://api.hypixel.net/" + type + "?key=" + api_key + param, function (error, response, body) {
-                var e = JSON.parse(body);
+            request("https://api.hypixel.net/" + type + "?key=" + api_key + param, function (error, response, _body) {
+                const body = JSON.parse(_body);
                 if (error) {
                     callback(error, null);
                     throw error;
-                } else if (e.success === false) {
-                    console.log("[Hypixel API Error]: " + e.cause)
+                } else if (response.statusCode !== 200) {
+
+                    //setTimeout(null, 5000)
+
+                } else if (body.success === false) {
+                    console.log("[Hypixel API Error]: " + e.cause);
+                    callback(body.cause, null)
 
                 } else {
-                    console.log(e);
-                    callback(e, null);
+                    console.log(body);
+                    callback(null, body);
                 }
 
             })

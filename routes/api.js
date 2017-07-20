@@ -16,7 +16,7 @@ router.get("/:resource", function (req, res, next) {
         return
     }
 
-    controller.find(req.query, function(err, results) {
+    controller.find(req.query, function (err, results) {
         if (err) {
             res.json({
                 success: false,
@@ -31,10 +31,10 @@ router.get("/:resource", function (req, res, next) {
     });
 
     /*if (resource === "user") {
-        UserController.find(req.query, function (err, results) {
+     UserController.find(req.query, function (err, results) {
 
-        })
-    }*/
+     })
+     }*/
 });
 
 router.get("/:resource/:id", function (req, res, next) {
@@ -122,12 +122,12 @@ router.delete("/:resource/:id", function (req, res, next) {
                 message: "Not Found"
             });
             return
-        } else {
-            res.json({
-                success: true,
-                result: result
-            })
         }
+        res.json({
+            success: true,
+            result: result
+        })
+
     })
 });
 

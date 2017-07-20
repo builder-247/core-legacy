@@ -24,7 +24,7 @@ module.exports = {
     },
 
     // Name can be either username or dashed UUID.
-    findPlayer: function (name, callback) {
+    /*findPlayer: function (name, callback) {
 
         util.validatePlayer(name, isValid);
 
@@ -43,7 +43,7 @@ module.exports = {
                 callback(null, player)
             })
         }
-    },
+    },*/
 
     create: function (params, callback) {
         Player.create(params, function(err, player) {
@@ -69,7 +69,8 @@ module.exports = {
     delete: function (id, callback) {
         Player.findByIdAndRemove(id, function(err) {
             if (err) {
-                callback(err, null)
+                callback(err, null);
+                return
             }
 
             callback(null, null)
