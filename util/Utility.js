@@ -62,8 +62,8 @@ function validatePlayer(i, callback) {
         console.log("%s is a valid UUID", i);
         return removeDashes(i);
     } else {
-    // Convert from username to UUID
-        MojangAPIManager.getUUID(i, function(error, uuid) {
+        // Convert from username to UUID
+        MojangAPIManager.getUUID(i, function (error, uuid) {
             if (error) {
                 callback(error, null);
                 return
@@ -75,10 +75,30 @@ function validatePlayer(i, callback) {
 
 }
 
+function getBedwarsLevel(exp) {
+    // first few levels are different
+    if (exp < 500) {
+        return 0;
+    } else if (exp < 1500) {
+        return 1;
+    } else if (exp < 3500) {
+        return 2;
+    } else if (exp < 5500) {
+        return 3;
+    } else if (exp < 9000) {
+        return 4;
+    }
+
+    exp -= 9000;
+    return exp / 5000 + 4;
+}
+
+
 module.exports = {
     getRatio,
     hypixelFormattingIsWeird,
     removeDashes,
     colorNameToCode,
-    validatePlayer
+    validatePlayer,
+    getBedwarsLevel
 };
