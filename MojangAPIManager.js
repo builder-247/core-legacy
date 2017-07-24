@@ -37,9 +37,36 @@ function getUUID(username, callback) {
 // Get name history
 function getNameHistory(uuid, callback) {
 
+    request("https://api.mojang.com/user/profiles" + uuid + "/names", function(error, response, _body) {
+
+        if (response.statusCode !== 200) {
+            console.log("Error getting name history of player " + uuid + " : Server responded with code " + response.statusCode);
+            callback(response.statusCode, null);
+            return
+        }
+
+        if (error) {
+            console.log("Error getting name history of player " + uuid + " : " + error);
+            callback(error, null);
+            return
+        }
+
+        const body = JSON.parse(_body);
+
+        if (body.error) {
+            console.log("Error getting name history of player " + uuid + " : " + body.error + " : " + body.errorMessage);
+            callback(body.error + " : " + body.errorMessage, null);
+            return
+        }
+
+        callback(null, body);
+
+    })
+
 }
 
 // Fetch status of Mojang Services
+// TODO
 function mojangStatus() {
 
     request("https://status.mojang.com/check", function (error, response, body) {

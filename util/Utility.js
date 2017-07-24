@@ -1,4 +1,4 @@
-const MojangAPIManager = require("../MojangAPIManager");
+const Mojang = require("../MojangAPIManager");
 
 function getRatio(x, y) {
     return ((x / y).toFixed(2));
@@ -60,10 +60,10 @@ function validatePlayer(i, callback) {
     // From: https://bukkit.org/threads/best-way-to-check-if-a-string-is-a-uuid.258625/
     if ((/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i).test(i)) {
         console.log("%s is a valid UUID", i);
-        return removeDashes(i);
+        callback(null, removeDashes(i));
     } else {
         // Convert from username to UUID
-        MojangAPIManager.getUUID(i, function (error, uuid) {
+        Mojang.getUUID(i, function (error, uuid) {
             if (error) {
                 callback(error, null);
                 return

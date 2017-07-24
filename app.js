@@ -15,8 +15,8 @@ const app = express();
 const router = express.Router();
 
 const APIBuilder = require("./lib/APIBuilder");
-const HypixelAPIManager = require("./HypixelAPIManager");
-const MojangAPIManager = require("./MojangAPIManager");
+const Hypixel = require("./HypixelAPIManager");
+const Mojang = require("./MojangAPIManager");
 const util = require("./util/Utility");
 
 // View engine set up
@@ -43,12 +43,12 @@ util.validatePlayer("hypixel", function(err, uuid) {
 
 //386258427e6a4b4980ac32d12df89791
 //ef962ec2df6e48a2ac9d6062c1b84652
-/*HypixelAPIManager("player", "&uuid=ef962ec2df6e48a2ac9d6062c1b84652", function callback(error, data) {
+/*Hypixel("player", "&uuid=ef962ec2df6e48a2ac9d6062c1b84652", function callback(error, data) {
     //console.log("Response: " + JSON.stringify(data));
     APIBuilder(data);
 });*/
 
-//processName();
+
 //MojangAPIManager();
 
 
