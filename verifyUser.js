@@ -1,8 +1,8 @@
-const HypixelAPIManager = require("HypixelAPIManager");
+const Hypixel = require("HypixelAPIManager");
 
 function verify(uuid, api_key, callback) {
 
-    HypixelAPIManager(api_key, "", function(error, response) {
+    Hypixel(api_key, "", function(error, response) {
         if (error) {
             callback(error, null);
             return
