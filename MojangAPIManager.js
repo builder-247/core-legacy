@@ -37,7 +37,7 @@ function getUUID(username, callback) {
 // Get name history
 function getNameHistory(uuid, callback) {
 
-    request("https://api.mojang.com/user/profiles" + uuid + "/names", function(error, response, _body) {
+    request("https://api.mojang.com/user/profiles/" + uuid + "/names", function(error, response, _body) {
 
         if (response.statusCode !== 200) {
             console.log("Error getting name history of player " + uuid + " : Server responded with code " + response.statusCode);
