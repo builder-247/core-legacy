@@ -1,0 +1,21 @@
+{
+  "quests": {
+    "warlords": {
+      "daily": {
+        "warlords_ctf": {
+          "name": "Capture The Flag",
+          "description": "Complete 1 match with at least 10 kills or assists in Capture the Flag.",
+          "enabled": true,
+          "rewards": {
+            "experience": 3500,
+            "coins": 3000,
+            "broken_weapons": 3
+          }
+        }
+      },
+      "weekly": {
+        
+      }
+    }
+  }
+}

@@ -13,7 +13,8 @@ const defaults = {
     HYPIXEL_API_LIMIT: 120, // API key throttle limit
     NODE_ENV: 'development',
     MOJANG_STATUS_INTERVAL: 15000, // Interval between refreshing Mojang status in milliseconds
-    DB_URL: "mongodb://localhost/slothpixel" // Url of the MongoDB database
+    DB_URL: "mongodb://localhost/slothpixel", // Url of the MongoDB database
+    REDIS_URL: "redis://127.0.0.1:6379/0", // connection string for Redis
 };
 
 // ensure that process.env has all values in defaults, but prefer the process.env value

@@ -1,9 +1,9 @@
 const express = require("express");
-const router = express.Router();
+const api = express.Router();
 const UserController = require("../controllers/UserController");
 const controllers = require("../controllers");
 
-router.get("/:resource", function (req, res, next) {
+api.get("/:resource", function (req, res, next) {
 
     const resource = req.params.resource;
     const controller = controllers[resource];
@@ -37,7 +37,7 @@ router.get("/:resource", function (req, res, next) {
      }*/
 });
 
-router.get("/:resource/:id", function (req, res, next) {
+api.get("/:resource/:id/:info?", function (req, res, next) {
 
     const resource = req.params.resource;
     const id = req.params.id;
@@ -69,7 +69,7 @@ router.get("/:resource/:id", function (req, res, next) {
 });
 
 // TODO - Add auth
-router.post("/:resource", function (req, res, next) {
+api.post("/:resource", function (req, res, next) {
 
     const resource = req.params.resource;
 
@@ -100,7 +100,7 @@ router.post("/:resource", function (req, res, next) {
 
 // ONLY FOR TESTING
 
-router.delete("/:resource/:id", function (req, res, next) {
+api.delete("/:resource/:id", function (req, res, next) {
 
     const resource = req.params.resource;
     const id = req.params.id;
@@ -131,4 +131,4 @@ router.delete("/:resource/:id", function (req, res, next) {
     })
 });
 
-module.exports = router;
+module.exports = api;
