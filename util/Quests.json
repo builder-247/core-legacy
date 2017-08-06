@@ -11,11 +11,55 @@
             "coins": 3000,
             "broken_weapons": 3
           }
+        },
+        "warlords_tdm": {
+          "name": "Team Deathmatch",
+          "description": "Complete 1 match with at least 10 kills or assists in Team Deathmatch.",
+          "enabled": true,
+          "rewards": {
+            "experience": 3500,
+            "coins": 3000,
+            "broken_weapons": 3
+          }
+        },
+        "warlords_domination": {
+          "name": "Domination",
+          "description": "Complete 1 match with at least 15 kills or assists in Domination.",
+          "enabled": true,
+          "rewards": {
+            "experience": 3500,
+            "coins": 3000,
+            "broken_weapons": 3
+          }
+        },
+        "warlords_win": {
+          "name": "Warlords",
+          "description": "Win 1 match of Warlords",
+          "enabled": true,
+          "rewards": {
+            "experience": 3500,
+            "coins": 5500,
+            "broken_weapons": 3
+          }
         }
       },
       "weekly": {
-        
+        "warlords_dedication": {
+          "name": "Dedication",
+          "description": "Complete 30 matches with at least 10 kills or assists in any game mode.",
+          "enabled": true,
+          "rewards": {
+            "experience": 20000,
+            "coins": 10000,
+            "magic_dust": 200,
+            "void_shards": 15,
+            "broken_weapons": 15
+          }
+        }
       }
+    },
+    "tntgames": {
+
     }
   }
 }
