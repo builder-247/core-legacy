@@ -1,6 +1,9 @@
 const Mojang = require("../MojangAPIManager");
 
 function getRatio(x, y) {
+    if (typeof x === "undefined" && typeof y === "undefined") {
+        return(null)
+    }
     return ((x / y).toFixed(2));
 }
 
