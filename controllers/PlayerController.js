@@ -26,7 +26,7 @@ module.exports = {
     },
 
     // Name can be either username or dashed UUID.
-    findPlayer: function (name, callback) {
+    findPlayer: function (name, info, callback) {
 
         // Check cache here
 
@@ -42,7 +42,7 @@ module.exports = {
                if (error) {
 
                }
-               APIBuilder(data, uuid, null, sendStats);
+               APIBuilder(data, uuid, info, sendStats);
 
                 function sendStats(error, response) {
                     callback(null, JSON.parse(response));

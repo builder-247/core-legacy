@@ -41,6 +41,7 @@ api.get("/:resource/:id/:info?", function (req, res, next) {
 
     const resource = req.params.resource;
     const id = req.params.id;
+    const info = req.params.info || null;
 
     const controller = controllers[resource];
 
@@ -53,7 +54,7 @@ api.get("/:resource/:id/:info?", function (req, res, next) {
     }
 
     if (resource === "player") {
-        controller.findPlayer(id, function (err, result) {
+        controller.findPlayer(id, info, function (err, result) {
             if (err) {
                 res.json({
                     success: false,
