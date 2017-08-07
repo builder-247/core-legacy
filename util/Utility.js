@@ -68,7 +68,7 @@ function validatePlayer(i, callback) {
                 callback(error, null);
                 return
             }
-
+            console.log("%s is a valid UUID", uuid);
             callback(null, uuid);
         })
     }
