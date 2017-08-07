@@ -52,20 +52,38 @@ api.get("/:resource/:id/:info?", function (req, res, next) {
         return
     }
 
-    controller.findById(id, function (err, result) {
-        if (err) {
-            res.json({
-                success: false,
-                message: "Not Found"
-            });
-            return
-        } else {
-            res.json({
-                success: true,
-                result: result
-            })
-        }
-    })
+    if (resource === "player") {
+        controller.findPlayer(id, function (err, result) {
+            if (err) {
+                res.json({
+                    success: false,
+                    message: "Not Found"
+                });
+                return
+            } else {
+                res.json({
+                    success: true,
+                    result: result
+                })
+            }
+        })
+    } else {
+
+        controller.findById(id, function (err, result) {
+            if (err) {
+                res.json({
+                    success: false,
+                    message: "Not Found"
+                });
+                return
+            } else {
+                res.json({
+                    success: true,
+                    result: result
+                })
+            }
+        })
+    }
 });
 
 // TODO - Add auth

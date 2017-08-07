@@ -1,5 +1,7 @@
 const Player = require("../models/Player");
 const util = require("../util/Utility");
+const APIBuilder = require("../lib/APIBuilder");
+const Hypixel = require("../HypixelAPIManager");
 
 module.exports = {
 
@@ -24,7 +26,9 @@ module.exports = {
     },
 
     // Name can be either username or dashed UUID.
-    /*findPlayer: function (name, callback) {
+    findPlayer: function (name, callback) {
+
+        // Check cache here
 
         util.validatePlayer(name, isValid);
 
@@ -34,16 +38,26 @@ module.exports = {
                 return
             }
 
-            // Not like this
-            Player.findOne({ player.uuid: uuid}, function(err, player) {
+            Hypixel("player", "&uuid=" + uuid, function(error, data) {
+               if (error) {
+
+               }
+               APIBuilder(data, uuid, null, sendStats);
+
+                function sendStats(error, response) {
+                    callback(null, JSON.parse(response));
+                }
+            });
+
+            /*Player.findOne({uuid: uuid}, function(err, player) {
                 if (err) {
                     callback(err, null);
                     return
                 }
                 callback(null, player)
-            })
+            })*/
         }
-    },*/
+    },
 
     create: function (params, callback) {
         Player.create(params, function(err, player) {

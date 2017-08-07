@@ -1,16 +1,9 @@
 const mongoose = require("mongoose");
 
 const PlayerSchema = new mongoose.Schema({
-    player: {type: Object, default: {
-        uuid: "ef962ec2df6e48a2ac9d6062c1b84652",
-        username: "builder_247",
-        first_login: 1234567890,
-
-        stats: {
-            Arena: {
-                coins: 12
-            }
-        }}},
+    stats: {type: Object, default: {}},
+    uuid: {type: String, default:"5409757b87344c0394b10bf966a2d594"},
+    username: {type: String, default:"huntz"},
     created: {type: Date, default: Date.now},
 
 });
