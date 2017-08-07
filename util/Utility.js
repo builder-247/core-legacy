@@ -13,6 +13,9 @@ function removeDashes(i) {
 }
 
 function colorNameToCode(color) {
+    if (color === null) {
+        return (null);
+    }
     switch (color.toLowerCase()) {
         case "green":
             return ("&a");
