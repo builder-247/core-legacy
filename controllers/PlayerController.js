@@ -16,7 +16,7 @@ module.exports = {
     },
 
     findById: function (id, callback) {
-        Player.findById(id, function(err, player) {
+        Player.findById(id, function (err, player) {
             if (err) {
                 callback(err, null);
                 return
@@ -26,51 +26,57 @@ module.exports = {
     },
 
     // Name can be either username or dashed UUID.
-    findPlayer: function (name, info, callback) {
+    findPlayer: function (name, resource, callback) {
 
         // Check cache here
 
         util.validatePlayer(name, isValid);
 
-        function isValid (err, uuid) {
+        function isValid(err, uuid) {
             if (err) {
                 callback(err, null);
                 return
             }
 
-            Hypixel("player", "&uuid=" + uuid, function(error, data) {
-               if (error) {
+            Hypixel("player", "&uuid=" + uuid, function (error, data) {
 
-               }
-               APIBuilder(data, uuid, info, sendStats);
+                APIBuilder(data, uuid, resource, sendStats);
 
                 function sendStats(error, response) {
-                    callback(null, JSON.parse(response));
+
+                    // TODO - In-memory caching?
+
+                    if (resource !== null) {
+                        callback(null, response[resource]);
+                    } else {
+                        callback(null, response);
+                    }
+
+                    /*this.create({stats: response, uuid: response.general.uuid},next);
+
+                    function next(error, msg) {
+                        if (err) {
+                            console.log(error)
+                        }
+                    }*/
+
                 }
             });
 
             /*Player.findOne({uuid: uuid}, function(err, player) {
-                if (err) {
-                    callback(err, null);
-                    return
-                }
-                callback(null, player)
-            })*/
+             if (err) {
+             callback(err, null);
+             return
+             }
+             callback(null, player)
+             })*/
         }
     },
 
-    create: function (params, callback) {
-        Player.create(params, function(err, player) {
-            if (err) {
-                callback(err, null);
-                return
-            }
-            callback(null, player)
-        })
-    },
+
 
     update: function (id, params, callback) {
-        Player.findByIDAndUpdate(id, params, { new: true }, function(err, player) {
+        Player.findByIDAndUpdate(id, params, {new: true}, function (err, player) {
             if (err) {
                 callback(err, null);
                 return
@@ -81,7 +87,7 @@ module.exports = {
     },
 
     delete: function (id, callback) {
-        Player.findByIdAndRemove(id, function(err) {
+        Player.findByIdAndRemove(id, function (err) {
             if (err) {
                 callback(err, null);
                 return

@@ -1,6 +1,5 @@
 const express = require("express");
 const api = express.Router();
-const UserController = require("../controllers/UserController");
 const controllers = require("../controllers");
 
 api.get("/:resource", function (req, res, next) {
