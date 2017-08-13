@@ -153,6 +153,39 @@
           }
         }
       }
+    },
+    "paintball": {
+      "daily": {
+        "paintballer": {
+          "name": "Paintballer",
+          "description": "Win a game of paintball",
+          "enabled": true,
+          "rewards": {
+            "experience": 2500,
+            "coins": 3000
+          }
+        },
+        "paintball_killer": {
+          "name": "Paintballer",
+          "description": "Kill 100 players in Paintball",
+          "enabled": true,
+          "rewards": {
+            "experience": 2500,
+            "coins": 3000
+          }
+        }
+      },
+      "weekly": {
+        "paintball_expert": {
+          "name": "Paintball Expert",
+          "description": "Kill 750 players in Paintball/n Play 30 games of Paintball",
+          "enabled": true,
+          "rewards": {
+            "experience": 15000,
+            "coins": 20000
+          }
+        }
+      }
     }
   }
 }
