@@ -40,7 +40,7 @@ module.exports = {
 
             Hypixel("player", "&uuid=" + uuid, function (error, data) {
 
-                APIBuilder(data, uuid, resource, sendStats);
+                APIBuilder(data, uuid, resource, "player", sendStats);
 
                 function sendStats(error, response) {
 
