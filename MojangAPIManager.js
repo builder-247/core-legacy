@@ -1,7 +1,6 @@
 var request = require("request");
 var config = require("./config");
 var moment = require("moment");
-var colors = require("colors");
 
 // Get UUID from username
 function getUUID(username, callback) {
