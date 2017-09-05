@@ -21,7 +21,7 @@ module.exports = function (type, param, callback) {
 
     if (!API_IS_DOWN) {
         limiter.removeTokens(1, function () {
-            console.log("https://api.hypixel.net/" + type + "?key=" + api_key + param);
+            // console.log("https://api.hypixel.net/" + type + "?key=" + api_key + param);
             request("https://api.hypixel.net/" + type + "?key=" + api_key + param, function (error, response, _body) {
                 const body = JSON.parse(_body);
                 if (error) {
@@ -36,7 +36,6 @@ module.exports = function (type, param, callback) {
                     callback(body.cause, null)
 
                 } else {
-                    console.log(body);
                     callback(null, body);
                 }
 

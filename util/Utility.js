@@ -11,6 +11,10 @@ function hypixelFormattingIsWeird(i) {
     return (i.replace("Â§", "§"));
 }
 
+function betterFormatting(i) {
+    return (i.replace("§", "&"))
+}
+
 function removeDashes(i) {
     return (i.replace("-", ""))
 }
@@ -59,22 +63,21 @@ function colorNameToCode(color) {
     }
 }
 
-function validatePlayer(i, callback) {
+function validatePlayer(input, callback) {
 
     // Check if i is uuid, there is an edge condition where i matches the format but isn't a real UUID, only way to verify this is to request
     // the Mojang API. This however adds extra delay and is therefore ignored.
     // From: https://bukkit.org/threads/best-way-to-check-if-a-string-is-a-uuid.258625/
-    if ((/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i).test(i)) {
-        console.log("%s is a valid UUID", i);
-        callback(null, removeDashes(i));
+    if ((/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i).test(input)) {
+        callback(null, removeDashes(input));
     } else {
         // Convert from username to UUID
-        Mojang.getUUID(i, function (error, uuid) {
+        Mojang.getUUID(input, function (error, uuid) {
             if (error) {
                 callback(error, null);
+                console.log("%s is not a valid username", input);
                 return
             }
-            console.log("%s is a valid UUID", uuid);
             callback(null, uuid);
         })
     }
@@ -84,6 +87,7 @@ function validatePlayer(i, callback) {
 module.exports = {
     getRatio,
     hypixelFormattingIsWeird,
+    betterFormatting,
     removeDashes,
     colorNameToCode,
     validatePlayer,
