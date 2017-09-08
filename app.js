@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -18,16 +17,11 @@ const router = express.Router();
 const APIBuilder = require("./lib/APIBuilder");
 const util = require("./util/Utility");
 
-// View engine set up
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hjs");
-
 app.use(cors());
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use(subdomain('api', router));
 app.use("/", routes);
