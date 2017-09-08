@@ -2,6 +2,7 @@ const Player = require("../models/Player");
 const util = require("../util/Utility");
 const APIBuilder = require("../lib/APIBuilder");
 const Hypixel = require("../HypixelAPIManager");
+const client = require("../store/redis");
 
 module.exports = {
 
@@ -29,8 +30,14 @@ module.exports = {
     findPlayer: function (name, resource, callback) {
 
         // Check cache here
+        client.hgetall(name, function(err, obj) {
+            if(!obj) {
+                util.validatePlayer(name, isValid);
+            } else {
 
-        util.validatePlayer(name, isValid);
+            }
+        });
+
 
         function isValid(err, uuid) {
             if (err) {

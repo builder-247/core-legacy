@@ -1,8 +1,0 @@
-/players/stats/{name/uuid}/:game
-/players/guild/{name/uuid}
-/player/friends/{name/uuid}
-/player/session/{name/uuid}
-/guild/stats/{id}
-/boosters/:game
-/watchdogstats
-/key
