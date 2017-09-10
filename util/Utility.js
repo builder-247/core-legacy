@@ -68,7 +68,7 @@ function validatePlayer(input, callback) {
 
     redis.get("cache:" + input, function (err, uuid) {
         if (!err && uuid !== null) {
-            console.log("[CACHE] found match for username %s :" + uuid, input);
+            // console.log("[CACHE] found match for username %s :" + uuid, input);
             callback(null, uuid);
             return
         } else {

@@ -2,7 +2,7 @@ const Player = require("../models/Player");
 const util = require("../util/Utility");
 const APIBuilder = require("../lib/APIBuilder");
 const Hypixel = require("../HypixelAPIManager");
-const client = require("../store/redis");
+const redis = require("../store/redis");
 
 module.exports = {
 
@@ -29,15 +29,7 @@ module.exports = {
     // Name can be either username or dashed UUID.
     findPlayer: function (name, resource, callback) {
 
-        // Check cache here
-        client.hgetall(name, function(err, obj) {
-            if(!obj) {
-                util.validatePlayer(name, isValid);
-            } else {
-
-            }
-        });
-
+        util.validatePlayer(name, isValid);
 
         function isValid(err, uuid) {
             if (err) {
@@ -45,41 +37,37 @@ module.exports = {
                 return
             }
 
-            Hypixel("player", "&uuid=" + uuid, function (error, data) {
-
-                APIBuilder(data, uuid, resource, "player", sendStats);
-
-                function sendStats(error, response) {
-
-                    // TODO - In-memory caching?
-
-                    if (resource !== null) {
-                        callback(null, response[resource]);
-                    } else {
-                        callback(null, response);
-                    }
-
-                    /*this.create({stats: response, uuid: response.general.uuid},next);
-
-                    function next(error, msg) {
-                        if (err) {
-                            console.log(error)
-                        }
-                    }*/
-
+            redis.get("cache:player:" + uuid, function (err, cache) {
+                if (!err && cache !== null) {
+                    console.log("[CACHE] found stats for user %s", uuid);
+                    callback(null, JSON.parse(cache));
+                    return
                 }
-            });
 
-            /*Player.findOne({uuid: uuid}, function(err, player) {
-             if (err) {
-             callback(err, null);
-             return
-             }
-             callback(null, player)
-             })*/
+                Hypixel("player", "&uuid=" + uuid, function (error, data) {
+
+                    APIBuilder(data, uuid, resource, "player", sendStats);
+
+                    function sendStats(error, response) {
+
+                        if (error) {
+                            callback(error, null);
+                            return
+                        }
+
+                        // Cache players for 5 minutes
+                        redis.setex("cache:player:" + uuid, 60 * 5 , JSON.stringify(response));
+
+                        if (resource !== null) {
+                            callback(null, response[resource]);
+                        } else {
+                            callback(null, response);
+                        }
+                    }
+                });
+            });
         }
     },
-
 
 
     update: function (id, params, callback) {

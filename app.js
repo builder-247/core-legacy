@@ -14,9 +14,6 @@ const app = express();
 
 const router = express.Router();
 
-const APIBuilder = require("./lib/APIBuilder");
-const util = require("./util/Utility");
-
 app.use(cors());
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -26,5 +23,12 @@ app.use(cookieParser());
 app.use(subdomain('api', router));
 app.use("/", routes);
 app.use("/api", api);
+
+// Telemetry middleware
+app.use((req, res, callback) => {
+    if (req.originalUrl.indexOf("/api") === 0) {
+        // + total queries
+    }
+});
 
 module.exports = app;
