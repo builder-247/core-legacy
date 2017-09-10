@@ -40,7 +40,12 @@ module.exports = {
             redis.get("cache:player:" + uuid, function (err, cache) {
                 if (!err && cache !== null) {
                     console.log("[CACHE] found stats for user %s", uuid);
-                    callback(null, JSON.parse(cache));
+
+                    if (resource !== null) {
+                        callback(null, JSON.parse(cache)[resource]);
+                    } else {
+                        callback(null, JSON.parse(cache));
+                    }
                     return
                 }
 

@@ -22,7 +22,7 @@ function getUUID(username, callback) {
         const body = JSON.parse(_body);
 
         if (body.error) {
-            console.log("Error getting UUID of player " + username + " : " + body.error + " : " + body.errorMessage);
+            console.log("Error getting UUID of player %s : %s : %s", username, body.error, body.errorMessage);
             callback(body.error + " : " + body.errorMessage, null);
             return
         }

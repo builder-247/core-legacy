@@ -66,7 +66,7 @@ function colorNameToCode(color) {
 
 function validatePlayer(input, callback) {
 
-    redis.get("cache:" + input, function (err, uuid) {
+    redis.get("cache:uuid:" + input, function (err, uuid) {
         if (!err && uuid !== null) {
             // console.log("[CACHE] found match for username %s :" + uuid, input);
             callback(null, uuid);
@@ -87,7 +87,7 @@ function validatePlayer(input, callback) {
                     }
 
                     // Cache username:uuid for 6 hours
-                    redis.setex("cache:" + input, 60 * 60 * 6, uuid);
+                    redis.setex("cache:uuid:" + input, 60 * 60 * 6, uuid);
 
                     callback(null, uuid);
                 })
