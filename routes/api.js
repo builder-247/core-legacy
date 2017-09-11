@@ -15,7 +15,7 @@ api.get("/:resource", function (req, res, next) {
         return
     }
 
-    controller.find(req.query, function (err, results) {
+    controller.get(req.query, null, function (err, results) {
         if (err) {
             res.json({
                 success: false,
@@ -53,7 +53,7 @@ api.get("/:resource/:id/:info?", function (req, res, next) {
     }
 
     if (resource === "player") {
-        controller.findPlayer(id, info, function (err, result) {
+        controller.get(id, info, function (err, result) {
             if (err) {
                 res.json({
                     success: false,

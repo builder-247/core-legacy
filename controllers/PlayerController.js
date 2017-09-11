@@ -27,7 +27,7 @@ module.exports = {
     },
 
     // Name can be either username or dashed UUID.
-    findPlayer: function (name, resource, callback) {
+    get: function (name, resource, callback) {
 
         util.validatePlayer(name, isValid);
 

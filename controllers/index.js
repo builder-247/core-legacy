@@ -1,7 +1,9 @@
 const UserController = require("./UserController");
 const PlayerController = require("./PlayerController");
+const BoosterController = require("./BoosterController");
 
 module.exports = {
     user: UserController,
-    player: PlayerController
+    player: PlayerController,
+    boosters: BoosterController
 };
