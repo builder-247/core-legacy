@@ -4,11 +4,10 @@ const Hypixel = require("../HypixelAPIManager");
 const redis = require("../store/redis");
 
 module.exports = {
+    
+    get: function (resource, empty_space, callback) {
 
-
-    // Name can be either username or dashed UUID.
-    get: function (name, resource, callback) {
-
+        console.log(resource);
 
         redis.get("cache:boosters", function (err, cache) {
             if (!err && cache !== null) {
@@ -34,12 +33,12 @@ module.exports = {
                     }
 
                     // Cache boosters for 10 seconds
-                    redis.setex("cache:boosters", 10, JSON.stringify(response));
+                    redis.setex("cache:boosters", 10, JSON.stringify(response.boosters));
 
                     if (resource !== null) {
-                        callback(null, response[resource]);
+                        callback(null, response.boosters[resource]);
                     } else {
-                        callback(null, response);
+                        callback(null, response.boosters);
                     }
                 }
             });

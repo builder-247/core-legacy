@@ -29,6 +29,11 @@ module.exports = {
     // Name can be either username or dashed UUID.
     get: function (name, resource, callback) {
 
+        if (typeof name !== "string") {
+            callback("Invalid username parameter", null);
+            return
+        }
+
         util.validatePlayer(name, isValid);
 
         function isValid(err, uuid) {
