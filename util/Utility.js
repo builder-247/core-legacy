@@ -72,11 +72,15 @@ function validatePlayer(input, callback) {
             callback(null, uuid);
             return
         } else {
-            // Check if i is uuid, there is an edge condition where i matches the format but isn't a real UUID, only way to verify this is to request
+            // Check if input is non dashed uuid.
+            if ((/^[0-9a-f]{32}$/i).test(input)) {
+                callback(null, removeDashes(input));
+            }
+            // Check if input is uuid, there is an edge condition where input matches the format but isn't a real UUID, only way to verify this is to request
             // the Mojang API. This however adds extra delay and is therefore ignored.
             // From: https://bukkit.org/threads/best-way-to-check-if-a-string-is-a-uuid.258625/
-            if ((/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i).test(input)) {
-                callback(null, removeDashes(input));
+            else if ((/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i).test(input)) {
+                callback(null, input);
             } else {
                 // Convert from username to UUID
                 Mojang.getUUID(input, function (error, uuid) {

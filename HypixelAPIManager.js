@@ -32,7 +32,7 @@ module.exports = function (type, param, callback) {
                     //setTimeout(null, 5000)
 
                 } else if (body.success === false) {
-                    console.log("[Hypixel API Error]: " + e.cause);
+                    console.log("[Hypixel API Error]: " + body.cause);
                     callback(body.cause, null)
 
                 } else {

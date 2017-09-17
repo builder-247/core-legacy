@@ -4,7 +4,7 @@ const Hypixel = require("../HypixelAPIManager");
 const redis = require("../store/redis");
 
 module.exports = {
-    
+
     get: function (resource, empty_space, callback) {
 
         console.log(resource);
