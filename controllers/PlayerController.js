@@ -56,6 +56,12 @@ module.exports = {
 
                 Hypixel("player", "&uuid=" + uuid, function (error, data) {
 
+                    if (error) {
+                        callback(error, null);
+                        return
+                        // retry from cache
+                    }
+
                     APIBuilder(data, uuid, resource, "player", sendStats);
 
                     function sendStats(error, response) {
