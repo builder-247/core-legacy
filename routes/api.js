@@ -15,7 +15,7 @@ api.get("/:resource", function (req, res, next) {
         return
     }
 
-    controller.get(req.query, null, function (err, results) {
+    controller.get(null, null, function (err, results) {
         if (err) {
             res.json({
                 success: false,
@@ -28,12 +28,6 @@ api.get("/:resource", function (req, res, next) {
             results: results
         });
     });
-
-    /*if (resource === "user") {
-     UserController.find(req.query, function (err, results) {
-
-     })
-     }*/
 });
 
 api.get("/:resource/:id/:info?", function (req, res, next) {
@@ -56,7 +50,7 @@ api.get("/:resource/:id/:info?", function (req, res, next) {
         if (err) {
             res.json({
                 success: false,
-                message: "Not Found"
+                message: err
             });
             return
         } else {

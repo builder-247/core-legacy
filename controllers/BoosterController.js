@@ -7,8 +7,6 @@ module.exports = {
 
     get: function (resource, empty_space, callback) {
 
-        console.log(resource);
-
         redis.get("cache:boosters", function (err, cache) {
             if (!err && cache !== null) {
                 console.log("[CACHE] found boosters");
@@ -38,7 +36,7 @@ module.exports = {
                     if (resource !== null) {
                         callback(null, response.boosters[resource]);
                     } else {
-                        callback(null, response.boosters);
+                        callback(null, response);
                     }
                 }
             });

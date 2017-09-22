@@ -34,7 +34,7 @@ module.exports = {
                             return
                         }
 
-                        // Cache session for 10 seconds
+                        // Cache session for 60 seconds
                         redis.setex("cache:session:" + uuid, 60, JSON.stringify(response));
 
                         callback(null, response);

@@ -13,6 +13,7 @@
     "dotenv": "^4.0.0",
     "express": "~4.13.1",
     "express-subdomain": "^1.0.5",
+    "hypixelconstants": "^1.0.0",
     "limiter": "^1.1.2",
     "moment": "^2.18.1",
     "mongoose": "^4.4.14",
