@@ -14,18 +14,10 @@
     "express": "~4.13.1",
     "express-subdomain": "^1.0.5",
     "hypixelconstants": "^1.0.0",
-    "limiter": "^1.1.2",
     "moment": "^2.18.1",
     "mongoose": "^4.4.14",
     "morgan": "~1.6.1",
     "redis": "^2.7.1",
     "serve-favicon": "~2.3.0"
-  },
-  "devDependencies": {
-    "babel-core": "^6.7.7",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react": "^6.5.0",
-    "webpack": "^1.13.0"
   }
 }

@@ -1,5 +1,4 @@
 const request = require("request");
-const RateLimiter = require("limiter").RateLimiter;
 const config = require("./config");
 const redis = require("./store/redis");
 
