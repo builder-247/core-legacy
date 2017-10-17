@@ -2,8 +2,11 @@ const Mojang = require("../MojangAPIManager");
 const redis = require("../store/redis");
 
 function getRatio(x, y) {
-    if (typeof x === "undefined" && typeof y === "undefined") {
-        return(null)
+    if (typeof x !== "number") {
+        x = 0;
+    }
+    if (typeof y !== "number") {
+        y = 0;
     }
     return ((x / y).toFixed(2));
 }
