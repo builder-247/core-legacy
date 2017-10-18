@@ -28,6 +28,9 @@ function colorNameToCode(color) {
         return (null);
     }
     switch (color.toLowerCase()) {
+        case "red":
+            return("&c");
+            break;
         case "green":
             return ("&a");
             break;
