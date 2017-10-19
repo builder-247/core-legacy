@@ -15,6 +15,8 @@ const defaults = {
     MOJANG_STATUS_INTERVAL: 15000, // Interval between refreshing Mojang status in milliseconds
     DB_URL: "mongodb://localhost/slothpixel", // Url of the MongoDB database
     REDIS_URL: "redis://127.0.0.1:6379/0", // connection string for Redis
+    ENABLE_REDIS_CACHE: true, // set to enable redis cache
+    ENABLE_DB_CACHE: false // set to enable MongoDB cache
 };
 
 // ensure that process.env has all values in defaults, but prefer the process.env value
@@ -31,9 +33,7 @@ if (process.env.NODE_ENV === 'test') {
     // process.env.CASSANDRA_URL = process.env.CASSANDRA_TEST_URL;
     // process.env.REDIS_URL = process.env.REDIS_TEST_URL;
     process.env.SESSION_SECRET = 'testsecretvalue';
-    process.env.ENABLE_MATCH_CACHE = 1;
-    process.env.FRONTEND_PORT = 5001;
-    process.env.PARSER_PORT = 5201;
+    process.env.FRONTEND_PORT = 80080;
 }
 // now processes can use either process.env or config
 module.exports = process.env;

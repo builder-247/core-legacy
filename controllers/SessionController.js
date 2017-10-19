@@ -2,10 +2,11 @@ const util = require("../util/Utility");
 const APIBuilder = require("../lib/APIBuilder");
 const Hypixel = require("../HypixelAPIManager");
 const redis = require("../store/redis");
+const cache = require("../store/cache");
 
 module.exports = {
 
-    get: function (name, empty_space, callback) {
+    get: function (name, empty_space, query, callback) {
 
         util.validatePlayer(name, isValid);
 
@@ -15,9 +16,12 @@ module.exports = {
                 return
             }
 
-            redis.get("cache:session:" + uuid, function (err, cache) {
+            const req = {
+                "name": "cache:session:" + uuid,
+                "query": query
+            };
+            cache.getFromCache(req, function (err, cache) {
                 if (!err && cache !== null) {
-                    console.log("[CACHE] found session for %s", uuid);
 
                     callback(null, JSON.parse(cache));
                     return

@@ -2,10 +2,11 @@ const util = require("../util/Utility");
 const APIBuilder = require("../lib/APIBuilder");
 const Hypixel = require("../HypixelAPIManager");
 const redis = require("../store/redis");
+const cache = require("../store/cache");
 
 module.exports = {
 
-    get: function (name, resource, callback) {
+    get: function (name, resource, query, callback) {
 
         console.log(name);
 
@@ -32,10 +33,13 @@ module.exports = {
 
                 const guild_id = find_guild.guild;
 
-                redis.get("cache:guild:" + guild_id, function (err, cache) {
-                    if (!err && cache !== null) {
-                        console.log("[CACHE] found guild %s", guild_id);
+                const req = {
+                    "name": "cache:guild:" + guild_id,
+                    "query": query
+                };
+                cache.getFromCache(req, function (err, cache) {
 
+                    if (!err && cache !== null) {
                         if (resource !== null) {
                             callback(null, JSON.parse(cache)[resource]);
                         } else {

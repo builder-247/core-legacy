@@ -6,6 +6,7 @@ api.get("/:resource", function (req, res, next) {
 
     const resource = req.params.resource;
     const controller = controllers[resource];
+    const query = req.query || null;
 
     if (controller === undefined) {
         res.json({
@@ -15,7 +16,7 @@ api.get("/:resource", function (req, res, next) {
         return
     }
 
-    controller.get(null, null, function (err, results) {
+    controller.get(null, null, query, function (err, results) {
         if (err) {
             res.json({
                 success: false,
@@ -35,6 +36,7 @@ api.get("/:resource/:id/:info?", function (req, res, next) {
     const resource = req.params.resource;
     const id = req.params.id;
     const info = req.params.info || null;
+    const query = req.query || null;
 
     const controller = controllers[resource];
 
@@ -46,7 +48,8 @@ api.get("/:resource/:id/:info?", function (req, res, next) {
         return
     }
 
-    controller.get(id, info, function (err, result) {
+    // CHANGES!
+    controller.get(id, info, query, function (err, result) {
         if (err) {
             res.json({
                 success: false,

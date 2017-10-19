@@ -3,6 +3,7 @@ const util = require("../util/Utility");
 const APIBuilder = require("../lib/APIBuilder");
 const Hypixel = require("../HypixelAPIManager");
 const redis = require("../store/redis");
+const cache = require("../store/cache");
 
 module.exports = {
 
@@ -27,7 +28,7 @@ module.exports = {
     },
 
     // Name can be either username or dashed UUID.
-    get: function (name, resource, callback) {
+    get: function (name, resource, query, callback) {
 
         if (typeof name !== "string") {
             callback("Invalid username parameter", null);
@@ -42,9 +43,12 @@ module.exports = {
                 return
             }
 
-            redis.get("cache:player:" + uuid, function (err, cache) {
+            const req = {
+                "name": "cache:player:" + uuid,
+                "query": query
+            };
+            cache.getFromCache(req, function (err, cache) {
                 if (!err && cache !== null) {
-                    console.log("[CACHE] found stats for user %s", uuid);
 
                     if (resource !== null) {
                         callback(null, JSON.parse(cache)[resource]);
