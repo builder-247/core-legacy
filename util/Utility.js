@@ -28,6 +28,9 @@ function colorNameToCode(color) {
         return (null);
     }
     switch (color.toLowerCase()) {
+        case "gray":
+            return("&7");
+            break;
         case "red":
             return("&c");
             break;
@@ -62,7 +65,7 @@ function colorNameToCode(color) {
             return ("&5");
             break;
         case "dark_gray":
-            return ("&7");
+            return ("&8");
             break;
         case "black":
             return ("&0");
