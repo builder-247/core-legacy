@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
 
 const PlayerSchema = new mongoose.Schema({
-    stats: {type: Object, default: {}},
-    uuid: {type: String, default:""},
-    username: {type: String, default:""},
-    created: {type: Date, default: Date.now},
-
+    id: {type: String, required: true},
+    date: {type: Date, default: Date.now()},
+    data: {type: Object, default: {}}
 });
 
 module.exports = mongoose.model("PlayerSchema", PlayerSchema);

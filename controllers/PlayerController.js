@@ -45,15 +45,16 @@ module.exports = {
 
             const req = {
                 "name": "cache:player:" + uuid,
+                "type": "player",
                 "query": query
             };
-            cache.getFromCache(req, function (err, cache) {
-                if (!err && cache !== null) {
+            cache.getFromCache(req, function (err, _cache) {
+                if (!err && _cache !== null) {
 
                     if (resource !== null) {
-                        callback(null, JSON.parse(cache)[resource]);
+                        callback(null, JSON.parse(_cache)[resource]);
                     } else {
-                        callback(null, JSON.parse(cache));
+                        callback(null, JSON.parse(_cache));
                     }
                     return
                 }
@@ -76,6 +77,17 @@ module.exports = {
                         }
 
                         // Cache players for 5 minutes
+
+                        const req = {
+                            "type": "player",
+                            "id": uuid,
+                            "data": response
+                        };
+
+                        cache.writeToCache(req, function(cb) {
+                            console.log(cb)
+                        });
+
                         redis.setex("cache:player:" + uuid, 60 * 5 , JSON.stringify(response));
 
                         if (resource !== null) {

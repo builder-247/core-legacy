@@ -2,6 +2,21 @@ const express = require("express");
 const api = express.Router();
 const controllers = require("../controllers");
 
+const Models = require("../models");
+
+// Temporary path used for database testing
+api.get("/devtest", function(req, res, next) {
+    let player = Models["player"];
+
+    player.find()
+        .then(function(doc) {
+            res.json(doc)
+        });
+
+    //player.findOneAndRemove({ id: "ef962ec2df6e48a2ac9d6062c1b84652"}).exec();
+
+});
+
 api.get("/:resource", function (req, res, next) {
 
     const resource = req.params.resource;
