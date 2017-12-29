@@ -7,13 +7,13 @@ const subdomain = require('express-subdomain');
 const cors = require("cors");
 
 const db = require("./store/db");
-const routes = require('./routes/index');
 const api = require('./routes/api');
 
 const app = express();
 
 const router = express.Router();
 
+// CORS headers
 app.use(cors());
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -21,7 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(subdomain('api', router));
-app.use("/", routes);
 app.use("/api", api);
 
 // Telemetry middleware
