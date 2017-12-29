@@ -8,9 +8,6 @@ module.exports = {
 
     get: function (name, resource, query, callback) {
 
-        console.log(name);
-
-
         util.validatePlayer(name, isValid);
 
         function isValid(err, uuid) {
