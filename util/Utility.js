@@ -11,12 +11,8 @@ function getRatio(x, y) {
     return ((x / y).toFixed(2));
 }
 
-function hypixelFormattingIsWeird(i) {
-    return (i.replace("Â§", "§"));
-}
-
 function betterFormatting(i) {
-    return (i.replace("§", "&"))
+    return (i.replace("Â§", "§").replace("§", "&"))
 }
 
 function removeDashes(i) {
@@ -111,7 +107,6 @@ function validatePlayer(input, callback) {
 
 module.exports = {
     getRatio,
-    hypixelFormattingIsWeird,
     betterFormatting,
     removeDashes,
     colorNameToCode,
