@@ -1,4 +1,7 @@
 const Mojang = require("../MojangAPIManager");
+const config = require("../config");
+const request = require("request");
+const urllib = require("url");
 const redis = require("../store/redis");
 
 function getRatio(x, y) {
@@ -17,6 +20,86 @@ function betterFormatting(i) {
 
 function removeDashes(i) {
     return (i.replace("-", ""))
+}
+
+/**
+ * Creates a job object for enqueueing that contains details such as the Hypixel endpoint to hit
+ * See https://github.com/HypixelDev/PublicAPI/tree/master/Documentation/methods
+ * */
+function generateJob(type, payload) {
+    const api_url = "https://api.hypixel.net";
+    let api_key = config.HYPIXEL_API_KEY;
+    const opts = {
+        boosters() {
+            return {
+                url: `${api_url}/boosters?key=${api_key}`
+            };
+        },
+        findguild() {
+            return {
+                url: `${api_url}/findguild?key=${api_key}&byUuid=${payload.id}`
+            };
+        },
+        guild() {
+            return {
+                url: `${api_url}/guild?key=${api_key}&id=${payload.id}`
+            };
+        },
+        key() {
+            return {
+                url: `${api_url}/key?key=${api_key}`
+            };
+        },
+        session() {
+            return {
+                url: `${api_url}/session?key=${api_key}&uuid=${payload.id}`
+            };
+        },
+        player() {
+            return {
+                url: `${api_url}/player?key=${api_key}&uuid=${payload.id}`
+            };
+        },
+        watchdogstats() {
+            return {
+                url: `${api_url}/watchdogstats?key=${api_key}`
+            };
+        },
+
+    };
+    return opts[type]();
+}
+
+/**
+ * A wrapper around HTTPS requests that handles:
+ *
+ *
+ * */
+function getData(url, cb) {
+    if (typeof url === 'object' && url && url.url) {
+        u = url.url;
+    } else {
+        u = url;
+    }
+    const parse = urllib.parse(u, true);
+    const hypixel_api = parse.host === 'api.hypixel.net';
+    const mojang_api = parse.host === 'api.mojang.com';
+    const target = urllib.format(parse);
+    return request({
+        url: target,
+        json: true
+    },(err, res, body) => {
+        if (err
+            || !res
+            || res.statusCode !== 200
+            || !body
+        ) {
+            console.error(`[INVALID] status`)
+        } else if (hypixel_api && !body.success) {
+            console.error(`[Hypixel API Error]: ${body.cause}`)
+        }
+        cb(null, body);
+    })
 }
 
 function colorNameToCode(color) {
@@ -108,6 +191,8 @@ function validatePlayer(input, callback) {
 module.exports = {
     getRatio,
     betterFormatting,
+    generateJob,
+    getData,
     removeDashes,
     colorNameToCode,
     validatePlayer,
