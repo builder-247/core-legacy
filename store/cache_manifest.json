@@ -1,0 +1,32 @@
+{
+  "models": {
+    "player": {
+      "db_cache": true,
+      "redis_timeout": 300
+    },
+    "guild": {
+      "db_cache": true,
+      "redis_timeout": 600
+    },
+    "findguild": {
+      "db_cache": true,
+      "redis_timeout": 600
+    },
+    "session": {
+      "db_cache": false,
+      "redis_timeout": 60
+    },
+    "booster": {
+      "db_cache": true,
+      "redis_timeout": 10
+    },
+    "friends": {
+      "db_cache": true,
+      "redis_timeout": 600
+    },
+    "uuid": {
+      "db_cache": false,
+      "redis_timeout": 21600
+    }
+  }
+}

@@ -1,15 +1,21 @@
 const express = require("express");
 const api = express.Router();
-const controllers = require("../controllers");
-
-const Models = require("../models");
-
+const controller = require("../controllers/MasterController");
+const util = require("../util/Utility");
+const allowed_endpoints = [
+    "player",
+    "boosters",
+    "session",
+    "friends",
+    "guild"
+];
 // Temporary path used for database testing
-api.get("/devtest", function(req, res, next) {
+const Models = require("../models");
+api.get("/devtest", function (req, res, next) {
     let player = Models["player"];
 
     player.find()
-        .then(function(doc) {
+        .then(function (doc) {
             res.json(doc)
         });
 
@@ -17,45 +23,43 @@ api.get("/devtest", function(req, res, next) {
 
 });
 
-api.get("/:resource", function (req, res, next) {
-
-    const resource = req.params.resource;
-    const controller = controllers[resource];
+api.get("/guild/:id", (req, res, next) => {
+    const id = req.params.id || null;
+    const info = req.params.info || null;
     const query = req.query || null;
-
-    if (controller === undefined) {
-        res.json({
-            success: false,
-            message: "Invalid Resource Request: " + resource
-        });
-        return
-    }
-
-    controller.get(null, null, query, function (err, results) {
+    controller("findguild", id, info, query, (err, response) => {
         if (err) {
             res.json({
                 success: false,
                 message: err
             });
-            return
+        } else {
+            controller("guild", response.findguild, info,  query, (err, response) => {
+                if (err) {
+                    res.json({
+                        success: false,
+                        message: err
+                    });
+                } else {
+                    res.json({
+                        success: true,
+                        results: response.data || response,
+                        date: response.date || Math.floor(Date.now() / 1000)
+                    });
+                }
+            })
         }
-        res.json({
-            success: true,
-            results: results
-        });
     });
 });
 
-api.get("/:resource/:id/:info?", function (req, res, next) {
+api.get("/:resource/:id?/:info?", (req, res, next) => {
 
     const resource = req.params.resource;
-    const id = req.params.id;
+    const id = req.params.id || null;
     const info = req.params.info || null;
     const query = req.query || null;
 
-    const controller = controllers[resource];
-
-    if (controller === undefined) {
+    if (allowed_endpoints.indexOf(resource) === -1) {
         res.json({
             success: false,
             message: "Invalid Resource Request: " + resource
@@ -63,84 +67,20 @@ api.get("/:resource/:id/:info?", function (req, res, next) {
         return
     }
 
-    // CHANGES!
-    controller.get(id, info, query, function (err, result) {
+    controller(resource, id, info, query, (err, response) => {
         if (err) {
             res.json({
                 success: false,
                 message: err
             });
-            return
         } else {
             res.json({
                 success: true,
-                result: result
-            })
-        }
-    })
-});
-
-// TODO - Add auth
-api.post("/:resource", function (req, res, next) {
-
-    const resource = req.params.resource;
-
-    const controller = controllers[resource];
-
-    if (controller === undefined) {
-        res.json({
-            success: false,
-            message: "Invalid Resource Request: " + resource
-        });
-        return
-    }
-
-    controller.create(req.body, function (err, result) {
-        if (err) {
-            res.json({
-                success: false,
-                message: err
+                results: response.data || response,
+                date: response.date || Math.floor(Date.now() / 1000)
             });
-            return
         }
-        res.json({
-            success: true,
-            result: result
-        })
-    })
-});
-
-// ONLY FOR TESTING
-
-api.delete("/:resource/:id", function (req, res, next) {
-
-    const resource = req.params.resource;
-    const id = req.params.id;
-
-    const controller = controllers[resource];
-
-    if (controller === undefined) {
-        res.json({
-            success: false,
-            message: "Invalid Resource Request: " + resource
-        });
-        return
-    }
-
-    controller.delete(id, function (err, result) {
-        if (err) {
-            res.json({
-                success: false,
-                message: "Not Found"
-            });
-            return
-        }
-        res.json({
-            success: true,
-            result: result
-        })
-
-    })
+    });
 });
 
 module.exports = api;

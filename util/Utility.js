@@ -1,8 +1,10 @@
 const Mojang = require("../MojangAPIManager");
+//const retriever = require("../svc/retriever");
 const config = require("../config");
 const request = require("request");
 const urllib = require("url");
 const redis = require("../store/redis");
+const cache = require("../store/cache");
 
 function getRatio(x, y) {
     if (typeof x !== "number") {
@@ -38,6 +40,11 @@ function generateJob(type, payload) {
         findguild() {
             return {
                 url: `${api_url}/findguild?key=${api_key}&byUuid=${payload.id}`
+            };
+        },
+        friends() {
+            return {
+                url: `${api_url}/friends?key=${api_key}&uuid=${payload.id}`
             };
         },
         guild() {
@@ -87,8 +94,8 @@ function getData(url, cb) {
     const target = urllib.format(parse);
     return request({
         url: target,
-        json: true
-    },(err, res, body) => {
+        json: hypixel_api
+    }, (err, res, body) => {
         if (err
             || !res
             || res.statusCode !== 200
@@ -96,7 +103,11 @@ function getData(url, cb) {
         ) {
             console.error(`[INVALID] status`)
         } else if (hypixel_api && !body.success) {
-            console.error(`[Hypixel API Error]: ${body.cause}`)
+            console.error(`[Hypixel API Error]: ${body.cause}`);
+            return cb(`${body.cause}`, null)
+        } else if (mojang_api && body.error) {
+            console.error(`[Mojang API Error]: ${body.error} : ${body.errorMessage}`);
+            return cb(`${body.error} : ${body.errorMessage}`, null)
         }
         cb(null, body);
     })
@@ -108,10 +119,10 @@ function colorNameToCode(color) {
     }
     switch (color.toLowerCase()) {
         case "gray":
-            return("&7");
+            return ("&7");
             break;
         case "red":
-            return("&c");
+            return ("&c");
             break;
         case "green":
             return ("&a");
@@ -152,48 +163,11 @@ function colorNameToCode(color) {
     }
 }
 
-function validatePlayer(input, callback) {
-
-    redis.get("cache:uuid:" + input, function (err, uuid) {
-        if (!err && uuid !== null) {
-            // console.log("[CACHE] found match for username %s :" + uuid, input);
-            callback(null, uuid);
-            return
-        } else {
-            // Check if input is non dashed uuid.
-            if ((/^[0-9a-f]{32}$/i).test(input)) {
-                callback(null, removeDashes(input));
-            }
-            // Check if input is uuid, there is an edge condition where input matches the format but isn't a real UUID, only way to verify this is to request
-            // the Mojang API. This however adds extra delay and is therefore ignored.
-            // From: https://bukkit.org/threads/best-way-to-check-if-a-string-is-a-uuid.258625/
-            else if ((/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i).test(input)) {
-                callback(null, input);
-            } else {
-                // Convert from username to UUID
-                Mojang.getUUID(input, function (error, uuid) {
-                    if (error) {
-                        callback(error, null);
-                        console.log("%s is not a valid username", input);
-                        return
-                    }
-
-                    // Cache username:uuid for 6 hours
-                    redis.setex("cache:uuid:" + input, 60 * 60 * 6, uuid);
-
-                    callback(null, uuid);
-                })
-            }
-        }
-    });
-}
-
 module.exports = {
     getRatio,
     betterFormatting,
     generateJob,
     getData,
     removeDashes,
-    colorNameToCode,
-    validatePlayer,
+    colorNameToCode
 };

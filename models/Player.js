@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PlayerSchema = new mongoose.Schema({
     id: {type: String, required: true},
-    date: {type: Date, default: Date.now()},
+    date: {type: Number, default: Date.now()},
     data: {type: Object, default: {}}
 });
 

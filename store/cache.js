@@ -1,7 +1,8 @@
 const redis = require("./redis");
 const config = require("../config");
+const util = require("../util/Utility");
+const manifest = require("./cache_manifest.json");
 const Models = require("../models");
-
 
 function checkAPIStatus(callback) {
     redis.get("API_IS_DOWN", function (err, API_IS_DOWN) {
@@ -15,11 +16,10 @@ function checkAPIStatus(callback) {
 
 function getRedisCache(req, callback) {
     if (config.ENABLE_REDIS_CACHE !== "false") {
-        redis.get(req, function (err, cache) {
+        redis.get(`cache:${req.type}:${req.id}`,(err, cache) => {
             if (err) {
                 callback(err, null);
             } else if (cache) {
-                console.log("[REDIS] %s", req);
                 callback(null, cache);
             } else {
                 callback("Error while fetching redis cache", null)
@@ -32,7 +32,7 @@ function getRedisCache(req, callback) {
 
 function writeRedisCache(req, callback) {
     if (config.ENABLE_REDIS_CACHE !== "false") {
-        redis.setex(`cache:${req.type}:${req.id}`, 60 * 5 , JSON.stringify(req.data));
+        redis.setex(`cache:${req.type}:${req.id}`, manifest[req.type].redis_timeout, JSON.stringify(req.data));
     } else {
         callback("REDIS cache not enabled on config", null)
     }
@@ -42,19 +42,22 @@ function getDBCache(req, callback) {
     if (config.ENABLE_DB_CACHE !== "false") {
         const model = Models[req.type];
         if (model) {
-            model.find({ id: 123 }, function (err, cache) {
-
+            model.findOne({ id: req.id }, (err, cache) => {
+                if (err) {
+                    console.log(err);
+                }
+                if (cache) {
+                    if (req.query.maxAge
+                        && cache.created - Date.now() > req.query.maxAge) {
+                        callback("Cache too old", null)
+                    } else {
+                        callback(null, cache)
+                    }
+                }
+                callback("Not found on MongoDB", null)
             })
         } else {
             callback(`No caching for type ${req.type}`, null)
-        }
-
-
-        if (false) {
-            if (req.query.maxAge
-                && cache.created - Date.now() > req.query.maxAge) {
-
-            }
         }
     } else {
         callback("MongoDB cache not enabled on config", null)
@@ -68,7 +71,7 @@ function writeDBCache(req, callback) {
         const item = {
             id: req.id,
             data: req.data,
-            date: Date.now()
+            date: util.UNIXTimestamp
         };
 
         model.findOne({ id: req.id },  function(err, entity) {
@@ -96,24 +99,13 @@ function writeDBCache(req, callback) {
 }
 
 module.exports = {
-    read: (req, callback) => {
 
-        redis.get("")
-    },
-
-    update: (req, callback) => {
-
-    },
-
-    write: (req, callback) => {
-
-        redis.setex(req, 60 * 60 * 12, callback)
-    },
-
+    getRedisCache,
+    writeRedisCache,
 
     getFromCache: (req, callback) => {
         checkAPIStatus(function (API) {
-            getRedisCache(req.name, function (err, cache) {
+            getRedisCache(req, function (err, cache) {
                 if (!err) {
                     callback(null, cache);
                 } else {
