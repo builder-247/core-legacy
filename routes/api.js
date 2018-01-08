@@ -33,6 +33,11 @@ api.get("/guild/:id", (req, res, next) => {
                 success: false,
                 message: err
             });
+        } else if (response.findguild === null) {
+            res.json({
+                success: true,
+                result: null,
+            });
         } else {
             controller("guild", response.findguild, info,  query, (err, response) => {
                 if (err) {
@@ -43,7 +48,7 @@ api.get("/guild/:id", (req, res, next) => {
                 } else {
                     res.json({
                         success: true,
-                        results: response.data || response,
+                        result: response.data || response,
                         date: response.date || Math.floor(Date.now() / 1000)
                     });
                 }
@@ -76,7 +81,7 @@ api.get("/:resource/:id?/:info?", (req, res, next) => {
         } else {
             res.json({
                 success: true,
-                results: response.data || response,
+                result: response.data || response,
                 date: response.date || Math.floor(Date.now() / 1000)
             });
         }

@@ -1,5 +1,4 @@
 const Mojang = require("../MojangAPIManager");
-//const retriever = require("../svc/retriever");
 const config = require("../config");
 const request = require("request");
 const urllib = require("url");
@@ -17,7 +16,10 @@ function getRatio(x, y) {
 }
 
 function betterFormatting(i) {
-    return (i.replace("Â§", "§").replace("§", "&"))
+    if (typeof i !== "string") {
+        return (i);
+    }
+    return (i.replace(/Â§/g, "§").replace(/§/g, "&"));
 }
 
 function removeDashes(i) {
@@ -101,7 +103,8 @@ function getData(url, cb) {
             || res.statusCode !== 200
             || !body
         ) {
-            console.error(`[INVALID] status`)
+            console.error(`[INVALID] status`);
+            return cb("Request failed", null);
         } else if (hypixel_api && !body.success) {
             console.error(`[Hypixel API Error]: ${body.cause}`);
             return cb(`${body.cause}`, null)

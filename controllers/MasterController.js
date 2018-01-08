@@ -4,13 +4,14 @@ const cache = require("../store/cache");
 const validate = require("../svc/validator");
 
 function getId(type, id, callback) {
-    console.log(type);
     if (type === "player"
         || type === "session"
         || type === "friends"
         || type === "findguild"
     ) {
-        console.log(type);
+        if (id === null) {
+            return callback("Please specify a player!", null)
+        }
         validate.validatePlayer(id, (err, id) => {
             if (err) {
                 return callback(err, null)
