@@ -10,7 +10,8 @@ function validatePlayer(input, cb) {
     }, (err, uuid) => {
         if (!err && uuid !== null) {
             // console.log("[CACHE] Found UUID for username %s : %s", input, uuid);
-            return cb(null, uuid);
+            let _uuid = uuid.replace(/"/g, "");
+            return cb(null, _uuid); // Workaround, needs a proper fix
         } else {
             // Check if input is non dashed uuid.
             if ((/^[0-9a-f]{32}$/i).test(input)) {
@@ -25,7 +26,7 @@ function validatePlayer(input, cb) {
                 // Convert from username to UUID
                 retriever.getUUID(input, function (error, uuid) {
                     if (error) {
-                        cb(error, null);
+                        cb("Invalid username or uuid", null);
                         console.log("%s is not a valid username", input);
                         return
                     }

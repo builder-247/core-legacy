@@ -10,19 +10,18 @@ function getId(type, id, callback) {
         || type === "findguild"
     ) {
         if (id === null) {
-            return callback("Please specify a player!", null)
+            callback("Please specify a player!", null)
         }
         validate.validatePlayer(id, (err, id) => {
             if (err) {
                 return callback(err, null)
             }
-            return callback(null, id)
+            callback(null, id)
         });
     } else {
         callback(null, id)
     }
 }
-
 module.exports = (type, _id, info, query, cb) => {
     getId(type, _id, (err, id) => {
         if (err) {
@@ -33,32 +32,37 @@ module.exports = (type, _id, info, query, cb) => {
             type: type,
             query: query
         }, processCache);
-
-        function processCache(err, cache) {
+        function processCache(err, cached_data) {
             if (err) {
                 console.log(err)
             }
-            if (cache) {
-                return cb(null, cache)
+            if (cached_data) {
+                return cb(null, cached_data)
             }
-        }
-
-        const url = util.generateJob(type, {
-            id: id
-        }).url;
-        util.getData(url, (err, body) => {
-            if (err) {
-                console.log(err);
-                return cb(err, null)
-            }
-            APIBuilder(body, id, type, sendStats);
-            function sendStats(err, stats) {
+            console.log("Generating a job %s", type);
+            const url = util.generateJob(type, {
+                id: id
+            }).url;
+            util.getData(url, (err, body) => {
                 if (err) {
                     console.log(err);
                     return cb(err, null)
                 }
-                cb(null, stats)
-            }
-        })
+                APIBuilder(body, id, type, sendStats);
+                function sendStats(err, stats) {
+                    cache.writeToCache({
+                        id: id,
+                        type: type,
+                        data: stats
+                    }, (success) => {
+                        if (err) {
+                            console.log(err);
+                            return cb(err, null)
+                        }
+                        return cb(null, stats)
+                    });
+                }
+            })
+        }
     });
 };

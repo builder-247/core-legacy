@@ -58,7 +58,6 @@ api.get("/guild/:id", (req, res, next) => {
 });
 
 api.get("/:resource/:id?/:info?", (req, res, next) => {
-
     const resource = req.params.resource;
     const id = req.params.id || null;
     const info = req.params.info || null;
@@ -71,7 +70,6 @@ api.get("/:resource/:id?/:info?", (req, res, next) => {
         });
         return
     }
-
     controller(resource, id, info, query, (err, response) => {
         if (err) {
             res.json({
@@ -82,10 +80,9 @@ api.get("/:resource/:id?/:info?", (req, res, next) => {
             res.json({
                 success: true,
                 result: response.data || response,
-                date: response.date || Math.floor(Date.now() / 1000)
+                date: response.date || Math.floor(Date.now())
             });
         }
     });
 });
-
 module.exports = api;
