@@ -12,7 +12,7 @@ function getRatio(x, y) {
     if (typeof y !== "number") {
         y = 0;
     }
-    return ((x / y).toFixed(2));
+    return Number((x / y).toFixed(2));
 }
 
 function betterFormatting(i) {
