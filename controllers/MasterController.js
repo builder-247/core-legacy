@@ -2,6 +2,7 @@ const util = require("../util/Utility");
 const APIBuilder = require("../lib/APIBuilder");
 const cache = require("../store/cache");
 const validate = require("../svc/validator");
+const populate = require("../svc/populate");
 
 function getId(type, id, callback) {
     if (type === "player"
@@ -55,6 +56,11 @@ module.exports = (type, _id, info, query, cb) => {
                         type: type,
                         data: stats
                     }, (success) => {
+                        if (type === "player") {
+                            populate.populateLeaderboardPlayer(stats, (err, lb) => {
+
+                            })
+                        }
                         if (err) {
                             console.log(err);
                             return cb(err, null)

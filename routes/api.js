@@ -1,6 +1,7 @@
 const express = require("express");
 const api = express.Router();
 const controller = require("../controllers/MasterController");
+const leaderboards = require("../controllers/LeaderboardController");
 const util = require("../util/Utility");
 const allowed_endpoints = [
     "player",
@@ -39,7 +40,8 @@ api.get("/guild/:id", (req, res, next) => {
                 result: null,
             });
         } else {
-            controller("guild", response.findguild, info,  query, (err, response) => {
+            let guild_id = response.findguild || response.data.findguild;
+            controller("guild", guild_id , info,  query, (err, response) => {
                 if (err) {
                     res.json({
                         success: false,
@@ -56,7 +58,22 @@ api.get("/guild/:id", (req, res, next) => {
         }
     });
 });
-
+api.get("/leaderboards", (req, res, next) => {
+    const query = req.query || null;
+    leaderboards(query, (err, response) => {
+        if (err) {
+            res.json({
+                success: false,
+                message: err
+            });
+        } else {
+            res.json({
+                success: true,
+                result: null
+            });
+        }
+    })
+});
 api.get("/:resource/:id?/:info?", (req, res, next) => {
     const resource = req.params.resource;
     const id = req.params.id || null;

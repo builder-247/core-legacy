@@ -11,5 +11,5 @@ module.exports = {
     findguild: FindGuild,
     boosters: Boosters,
     friends: Friends,
-    leadboardplayer: LeaderboardPlayer
+    leaderboardplayer: LeaderboardPlayer
 };
